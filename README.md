@@ -1,4 +1,4 @@
-# DigitalPay - A Java-Based Digital Payment App
+# YangaPlug - A Java-Based Digital Payment App
 
 ## Overview
 DigitalPay is a mobile application designed to streamline digital payments and improve financial transaction experiences. Built using Java, this app allows users to send, receive, and manage money securely and efficiently.
