@@ -1,7 +1,7 @@
 # YangaPlug - A Java-Based Digital Payment App
 
 ## Overview
-DigitalPay is a mobile application designed to streamline digital payments and improve financial transaction experiences. Built using Java, this app allows users to send, receive, and manage money securely and efficiently.
+YangaPlug is a mobile application designed to streamline digital payments and improve financial transaction experiences. Built using Java, this app allows users to send, receive, and manage money securely and efficiently.
 
 ## Features
 - **User Authentication**: Secure login and registration using email and password.
