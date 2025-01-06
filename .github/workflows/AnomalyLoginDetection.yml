@@ -1,0 +1,47 @@
+name: AnomalyLoginDetection
+
+on:
+  schedule:
+    - cron: '* * * * *' # This cron expression runs every minute
+
+permissions:
+  contents: read
+
+jobs:
+  anomaly-detection:
+    permissions:
+      contents: read 
+      security-events: write 
+      actions: read 
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.11
+
+      - name: Install required Python packages
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run Anomaly Detection Script
+        run: |
+          python detect_anomalies.py --log_file yanga_file_log.log
+
+      - name: Upload Anomaly Detection Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: anomaly-detection-report
+          path: anomaly_report.json
+
+      - name: Commit Anomaly Detection Results (if any)
+        if: success()
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git add results_report.json
+          git commit -m "Upload anomaly detection results"
+          git push
