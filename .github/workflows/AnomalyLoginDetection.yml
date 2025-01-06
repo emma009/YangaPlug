@@ -1,4 +1,4 @@
-name: AnomalyLoginDetection
+name: YangaAnomalyLoginDetection
 
 on:
   schedule:
@@ -29,19 +29,19 @@ jobs:
 
       - name: Run Anomaly Detection Script
         run: |
-          python detect_anomalies.py --log_file yanga_file_log.log
+          python detect_anomalies.py --log_file yanga_file_log.log || exit 1
 
-      - name: Upload Anomaly Detection Report
+      - name: Upload Yanga Anomaly Detection Report
         uses: actions/upload-artifact@v3
         with:
           name: anomaly-detection-report
-          path: anomaly_report.json
+          path: yanga_anomaly_report.json
 
       - name: Commit Anomaly Detection Results (if any)
-        if: success()
+        if: success() && steps.anomaly-detection.outputs.has_changes == 'true'
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "github-actions@github.com"
           git add results_report.json
-          git commit -m "Upload anomaly detection results"
+          git commit -m "Upload yanga anomaly detection results"
           git push
