@@ -17,7 +17,7 @@ jobs:
     permissions:
       contents: read # for actions/checkout to fetch code
       security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-      actions: read s
+      actions: read 
     runs-on: ubuntu-latest
 
     steps:
@@ -31,7 +31,7 @@ jobs:
       - name: Run mobsfscan
         uses: MobSF/mobsfscan@a60d10a83af68e23e0b30611c6515da604f06f65
         with:
-          args: . --sarif --output results.sarif || true
+          args: . --sarif --output results.sarif 
 
       - name: Upload mobsfscan report
         uses: github/codeql-action/upload-sarif@v3
